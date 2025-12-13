@@ -13,6 +13,7 @@
 
 ## ✅ Project Setup
 
+```bash
 git clone https://github.com/firoj7github/task01.git
 cd task01
 
