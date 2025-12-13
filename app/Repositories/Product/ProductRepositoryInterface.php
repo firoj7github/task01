@@ -1,0 +1,14 @@
+<?php
+
+namespace App\Repositories\Product;
+
+interface ProductRepositoryInterface
+{
+    public function all();
+    
+    public function store($request);
+    
+    public function edit($id);
+    
+    public function update($request, $id);
+}

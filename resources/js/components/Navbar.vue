@@ -110,8 +110,6 @@ import { useToast } from 'vue-toastification';
 const navigation = [
   { name: 'Home', href: '/', current: true },
   { name: 'Product', href: '/product', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
 ];
 
 const router = useRouter()
