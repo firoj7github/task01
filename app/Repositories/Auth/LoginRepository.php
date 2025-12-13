@@ -14,10 +14,7 @@ class LoginRepository implements LoginRepositoryInterface
 {
     public function login($request)
     {
-
-
-        $user = User::where('email', $request->email)
-            ->first();
+        $user = User::where('email', $request->email)->first();
 
         if (!$user) {
             return response()->json([
@@ -40,6 +37,5 @@ class LoginRepository implements LoginRepositoryInterface
             'token' => $token,
             'user'  => new UserResource($user),
         ];
-
     }
 }

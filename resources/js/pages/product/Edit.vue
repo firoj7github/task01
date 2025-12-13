@@ -48,10 +48,7 @@
 
         <!-- Submit Button -->
         <div>
-          <button
-            type="submit"
-            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition duration-300"
-          >
+          <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition duration-300">
             Update
           </button>
         </div>
@@ -78,7 +75,7 @@ const toast = useToast();
 const router = useRouter();
 const route = useRoute();
 
-const productId = route.params.id; // assuming route: /products/edit/:id
+const productId = route.params.id;
 
 // Load existing product data
 onMounted(async () => {
@@ -88,7 +85,7 @@ onMounted(async () => {
 
     name.value = data.name;
     price.value = data.price;
-    existingImage.value = data.image_url; // make sure backend returns full URL
+    existingImage.value = data.image_url;
   } catch (err) {
     console.error(err);
   }
@@ -112,20 +109,21 @@ const submitProduct = async () => {
     formData.append("name", name.value);
     formData.append("price", price.value);
     if (image.value) formData.append("image", image.value);
-    formData.append("_method", "PUT"); // For Laravel update
+    formData.append("_method", "PUT");
 
     const res = await axios.post(`/api/products/update/${productId}`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
 
-    toast.success("Product updated successfully");
-    // Redirect to products list
+    toast.success(res.data.message);
+    
+    // Redirect
     router.push("/product");
   } catch (err) {
     if (err.response?.status === 422) {
       errors.value = err.response.data.errors;
     } else {
-      console.error(err);
+      toast.error('Something went wrong');;
     }
   }
 };

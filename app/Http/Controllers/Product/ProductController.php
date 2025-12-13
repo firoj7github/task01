@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Product\ProductRepositoryInterface;
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
+use App\Traits\ApiReturnFormatTrait;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -17,41 +18,47 @@ class ProductController extends Controller
         $this->repo = $repo;
     }
 
+    use ApiReturnFormatTrait;
+
     public function index()
     {
-        return response()->json(['data' => $this->repo->all()]);
+        $data = $this->repo->all();
+
+        return $this->responseWithSuccess('Product fetched successfully', $data, 200);
     }
 
     public function store(StoreProductRequest $request)
     {
         $data = $this->repo->store($request);
-        
 
-        return response()->json([
-            'message' => 'Product created successfully',
-            'data'    => $data
-        ], 201);
+
+        return $this->responseWithSuccess('Product created successfully', $data, 201);
     }
-    
+
     public function edit($id)
     {
         $data = $this->repo->edit($id);
-        
 
-        return response()->json([
-            'message' => 'Product created successfully',
-            'data'    => $data
-        ], 201);
+        if ($data->image) {
+            $data->image_url = url('uploads/products/' . $data->image);
+        } else {
+            $data->image_url = null;
+        }
+
+        return $this->responseWithSuccess('Product fetched successfully', $data, 200);
     }
 
     public function update(UpdateProductRequest $request, $id)
     {
         $data = $this->repo->update($request, $id);
-        
 
-        return response()->json([
-            'message' => 'Product updated successfully',
-            'data'    => $data
-        ], 201);
+        return $this->responseWithSuccess('Product updated successfully', $data, 200);
+    }
+
+    public function destroy($id)
+    {
+        $this->repo->delete($id);
+
+        return $this->responseWithSuccess('Product deleted successfully', [], 200);
     }
 }

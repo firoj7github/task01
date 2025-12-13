@@ -1,18 +1,12 @@
 <template>
-    <div
-        class="flex min-h-full flex-col justify-center px-6 py-6 lg:px-8 bg-gray-500"
-    >
+    <div class="flex min-h-screen flex-col justify-center px-6 lg:px-8 bg-gray-500">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-            <h2
-                class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white"
-            >
+            <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">
                 Sign in to your account
             </h2>
         </div>
 
-        <div
-            class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm bg-white p-10 rounded"
-        >
+        <div class="mt-6 sm:mx-auto sm:w-full sm:max-w-sm bg-white p-10 rounded">
             <form @submit.prevent="login" class="space-y-6">
                 <div>
                     <label
@@ -89,17 +83,21 @@ import { ref } from "vue";
 import { useAuthStore } from "../stores/auth";
 import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
+import { storeToRefs } from "pinia";
 
 const router = useRouter();
 const toast = useToast();
 const email = ref("");
 const password = ref("");
 const auth = useAuthStore();
+const { message } = storeToRefs(auth);
 
 const login = async () => {
-    await auth.login(email.value, password.value);
-    if (auth.token) {
-        toast.success("Login Successful");
+   const resData = await auth.login(email.value, password.value);
+   console.log(resData);
+    if (auth.token) 
+    {
+        toast.success(resData.message);
         await router.push("/profile");
     }
 };

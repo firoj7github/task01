@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Repositories\Auth\LoginRepositoryInterface;
+use App\Traits\ApiReturnFormatTrait;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -15,16 +16,15 @@ class LoginController extends Controller
     {
         $this->repo = $repo;
     }
+
+    use ApiReturnFormatTrait;
     
     public function login(LoginRequest $request)
     {
         
        $data = $this->repo->login($request);
 
-       return response()->json([
-            'status' => 'success',
-            'message' => 'Registration successful.',
-            'data' => $data
-        ], 201);
+       return $this->responseWithSuccess('Login successful', $data, 201);
+
     }
 }

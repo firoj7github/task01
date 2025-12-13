@@ -1,8 +1,8 @@
 <template>
     <Navbar />
     <div class="min-h-screen bg-gray-50 flex flex-col justify-start">
-  <router-view/>
-</div>
+        <router-view />
+    </div>
 </template>
 
 <script setup>

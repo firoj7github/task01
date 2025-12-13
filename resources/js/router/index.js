@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../pages/Home.vue';
 import Login from '../pages/Login.vue';
 import Register from '../pages/Register.vue';
@@ -8,14 +8,15 @@ import ProductCreate from '../pages/product/Add.vue';
 import ProductEdit from '../pages/product/Edit.vue';
 
 const routes = [
-  { path: '/', component: Home },
+  { path: '/', component: Home, name: 'Home' },
   { path: '/user/login', component: Login, name: 'Login' },
-  { path: '/user/register', component: Register },
-  { path: '/profile', component: Profile, meta: { requiresAuth: true } },
-  { path: '/product', component: Product, meta: { requiresAuth: true } },
-  { path: '/product/create', component: ProductCreate, meta: { requiresAuth: true } },
-  { path: '/product/edit/:id', component: ProductEdit, meta: { requiresAuth: true } },
+  { path: '/user/register', component: Register, name: 'Register' },
+  { path: '/profile', component: Profile, name: 'Profile', meta: { requiresAuth: true } },
+  { path: '/product', component: Product, name: 'ProductIndex', meta: { requiresAuth: true } },
+  { path: '/product/create', component: ProductCreate, name: 'ProductCreate', meta: { requiresAuth: true } },
+  { path: '/product/edit/:id', component: ProductEdit, name: 'ProductEdit', meta: { requiresAuth: true } },
 ];
+
 
 
 const router = createRouter({
