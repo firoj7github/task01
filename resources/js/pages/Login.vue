@@ -9,11 +9,7 @@
         <div class="mt-6 sm:mx-auto sm:w-full sm:max-w-sm bg-white p-10 rounded">
             <form @submit.prevent="login" class="space-y-6">
                 <div>
-                    <label
-                        for="email"
-                        class="block text-sm/6 font-medium text-gray-800"
-                        >Email address</label
-                    >
+                    <label for="email" class="block text-sm/6 font-medium text-gray-800">Email address</label>
                     <div class="mt-2">
                         <input
                             id="email"
@@ -23,21 +19,14 @@
                             class="block w-full rounded-md px-3 py-2 bg-white text-gray-900 placeholder:text-gray-500 border border-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500"
                         />
                     </div>
-                    <div
-                        v-if="auth.error?.email"
-                        class="text-red-500 text-sm mt-0.5"
-                    >
+                    <div v-if="auth.error?.email" class="text-red-500 text-sm mt-0.5">
                         {{ auth.error.email[0] }}
                     </div>
                 </div>
 
                 <div>
                     <div class="flex items-center justify-between">
-                        <label
-                            for="password"
-                            class="block text-sm/6 font-medium text-gray-800"
-                            >Password</label
-                        >
+                        <label for="password" class="block text-sm/6 font-medium text-gray-800">Password</label>
                     </div>
                     <div class="mt-2">
                         <input
@@ -48,19 +37,13 @@
                             class="block w-full rounded-md px-3 py-2 bg-white text-gray-900 placeholder:text-gray-500 border border-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500"
                         />
                     </div>
-                    <div
-                        v-if="auth.error?.password"
-                        class="text-red-500 text-sm mt-0.5"
-                    >
+                    <div v-if="auth.error?.password" class="text-red-500 text-sm mt-0.5">
                         {{ auth.error.password[0] }}
                     </div>
                 </div>
 
                 <div>
-                    <button
-                        type="submit"
-                        class="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                    >
+                    <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
                         Sign in
                     </button>
                 </div>
@@ -96,14 +79,12 @@ const login = async () => {
    try {
     const resData = await auth.login(email.value, password.value);
 
-    // On success
     if (auth.token) {
-        toast.success(resData.mssage); // you can hardcode success
+        toast.success(resData.message);
         await router.push("/profile");
     }
 } catch (error) {
-    // On error
-    // Laravel returns 400 with {status: 'error', message: '...'}
+    
     if (error.response && error.response.data && error.response.data.message) {
         toast.error(error.response.data.message);
     } else {

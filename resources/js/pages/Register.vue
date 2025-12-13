@@ -108,6 +108,7 @@ const toast = useToast();
 const name = ref("");
 const email = ref("");
 const password = ref("");
+const password_confirmation = ref("");
 const auth = useAuthStore();
 
 const register = async () => {
@@ -115,7 +116,8 @@ const register = async () => {
         const resData = await auth.register(
             name.value,
             email.value,
-            password.value
+            password.value,
+            password_confirmation.value
         );
 
         if (auth.token) {
