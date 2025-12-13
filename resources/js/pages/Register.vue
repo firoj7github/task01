@@ -15,6 +15,7 @@
                             id="name"
                             type="name"
                             name="name"
+                            placeholder="Name"
                             v-model="name"
                             class="block w-full rounded-md px-3 py-2 bg-white text-gray-900 placeholder:text-gray-500 border border-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500"
                         />
@@ -31,6 +32,7 @@
                             type="email"
                             name="email"
                             v-model="email"
+                            placeholder="Email"
                             class="block w-full rounded-md px-3 py-2 bg-white text-gray-900 placeholder:text-gray-500 border border-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500"
                         />
                     </div>
@@ -53,6 +55,7 @@
                             type="password"
                             name="password"
                             v-model="password"
+                            placeholder="password"
                             class="block w-full rounded-md px-3 py-2 bg-white text-gray-900 placeholder:text-gray-500 border border-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500"
                         />
                     </div>
@@ -91,7 +94,7 @@
 
             <p class="mt-10 text-center text-sm/6 text-gray-600">
                 Already have a account?
-                <a href="user/login" class="font-semibold text-indigo-400 hover:text-indigo-500">Login</a>
+                <a href="/user/login" class="font-semibold text-indigo-400 hover:text-indigo-500">Login</a>
             </p>
         </div>
     </div>
