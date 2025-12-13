@@ -17,7 +17,7 @@ class ProductRepository implements ProductRepositoryInterface
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
-            $validated['image'] = ImageHelper::upload($request->file('image'), null, 'products');
+            $validated['image'] = ImageHelper::upload($request->file('image'),'products' );
         }
 
         return Product::create($validated);

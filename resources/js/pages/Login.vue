@@ -93,12 +93,24 @@ const auth = useAuthStore();
 const { message } = storeToRefs(auth);
 
 const login = async () => {
-   const resData = await auth.login(email.value, password.value);
-   console.log(resData);
-    if (auth.token) 
-    {
-        toast.success(resData.message);
+   try {
+    const resData = await auth.login(email.value, password.value);
+
+    // On success
+    if (auth.token) {
+        toast.success(resData.mssage); // you can hardcode success
         await router.push("/profile");
     }
+} catch (error) {
+    // On error
+    // Laravel returns 400 with {status: 'error', message: '...'}
+    if (error.response && error.response.data && error.response.data.message) {
+        toast.error(error.response.data.message);
+    } else {
+        toast.error("Something went wrong");
+    }
+}
+
+    
 };
 </script>
